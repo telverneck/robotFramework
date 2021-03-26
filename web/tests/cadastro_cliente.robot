@@ -14,4 +14,10 @@ Novo cliente
     ...     Nome cliente    00000000000     Endereco    11999999999
     Entao devo ver a notificacao:   Cliente cadastrado com sucesso!
 
+Campos obrigatório
+    Dado que acesso o formulario de cadastro de Cliente
+    Quando incluo o cliente:
+    ...     ${EMPTY}    ${EMPTY}     ${EMPTY}    ${EMPTY}
+    Entao devo ver mensagens nos campos de cadastro de Cliente que sao obrigatórios
+
 

@@ -12,3 +12,5 @@ Resource            ../resources/components/Sidebar.robot
 ${BASE_URL}         http://zepalheta-web:3000/
 ${adminEmail}            admin@zepalheta.com.br
 ${adminPassword}         pwd123
+${LONGTIMEOUT}           30
+${TIMEOUT}               15

@@ -29,5 +29,11 @@ Quando incluo o cliente:
 
 Entao devo ver a notificacao:   
     [Arguments]     ${message}
-    Wait Until Element Is Visible              ${SUCCESS_ALERT}      15
+    Wait Until Element Is Visible              ${SUCCESS_ALERT}      ${TIMEOUT} 
     Wait Until Element Contains                ${SUCCESS_ALERT}      ${message}
+
+Entao devo ver mensagens nos campos de cadastro de Cliente que sao obrigatórios
+    Wait Until Page Contains        Nome é obrigatório          ${TIMEOUT} 
+    Wait Until Page Contains        CPF é obrigatório           ${TIMEOUT} 
+    Wait Until Page Contains        Endereço é obrigatório      ${TIMEOUT} 
+    Wait Until Page Contains        Telefone é obrigatório      ${TIMEOUT} 
