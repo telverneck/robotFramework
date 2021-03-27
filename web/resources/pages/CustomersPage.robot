@@ -37,3 +37,7 @@ Entao devo ver mensagens nos campos de cadastro de Cliente que sao obrigatórios
     Wait Until Page Contains        CPF é obrigatório           ${TIMEOUT} 
     Wait Until Page Contains        Endereço é obrigatório      ${TIMEOUT} 
     Wait Until Page Contains        Telefone é obrigatório      ${TIMEOUT} 
+
+Entao devo ver o texto:
+    [Arguments]       ${mensagem}
+    Wait Until Page Contains        ${mensagem}          ${TIMEOUT}
