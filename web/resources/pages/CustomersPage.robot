@@ -2,26 +2,35 @@
 Documentation       Clientes Page
 
 ***Variables
-${REGISTER_BUTTON}      css:a[href*=register]
-${NAME_TEXT}            id:name
-${CPF_TEXT}             id:cpf
-${ADDRESS_TEXT}         id:address
-${PHONE_TEXT}           id:phone_number 
-${SAVE_BUTTON}          xpath://button[text()='CADASTRAR']
-${SUCCESS_ALERT}        css:div[type=success]
-${ERROR_ALERT}          css:div[type=error]
-${NAME_MANDATORY}       css:label[for=name]
-${CPF_MANDATORY}        css:label[for=cpf]
-${ADDRESS_MANDATORY}    css:label[for=address]
-${PHONE_MANDATORY}      css:label[for*=phone]
+${REGISTER_BUTTON}              css:a[href*=register]
+${NAME_TEXT}                    id:name
+${CPF_TEXT}                     id:cpf
+${ADDRESS_TEXT}                 id:address
+${PHONE_TEXT}                   id:phone_number 
+${SAVE_BUTTON}                  xpath://button[text()='CADASTRAR']
+${SUCCESS_ALERT}                css:div[type=success]
+${ERROR_ALERT}                  css:div[type=error]
+${NAME_MANDATORY}               css:label[for=name]
+${CPF_MANDATORY}                css:label[for=cpf]
+${ADDRESS_MANDATORY}            css:label[for=address]
+${PHONE_MANDATORY}              css:label[for*=phone] 
+${DELETE_CUSTOMER_BUTTON}       xpath://button[text()='APAGAR']
 
 
 ***Keywords***
 Dado que acesso o formulario de cadastro de Cliente
-    Wait Until Element Is Visible   ${CUSTOMERS_LINK}        10
-    Click Element                   ${CUSTOMERS_LINK} 
+    Go To Customers
     Wait Until Element Is Visible   ${REGISTER_BUTTON}       10
     Click Element                   ${REGISTER_BUTTON}
+
+E que acesso a lista de clientes
+    Go To Customers
+
+Dado que acesso possuo um cliente indesejado:
+    [Arguments]     ${name}    ${cpf}     ${address}    ${phone}
+    Delete Customer By Cpf  ${cpf}
+    Insert Customer         ${name}    ${cpf}     ${address}    ${phone}
+    Set Test Variable   ${cpf}
 
 E que tenho o seguinte cliente:
     [Arguments]     ${name}    ${cpf}     ${address}    ${phone}
@@ -39,6 +48,13 @@ Quando incluo o cliente
     Input Text       ${ADDRESS_TEXT}    ${address}
     Input Text       ${PHONE_TEXT}      ${phone}
     Click Button     ${SAVE_BUTTON}
+
+Quando removo esse cliente 
+    ${cpf_formatado} =                      Format Cpf                                      ${cpf}
+    Wait Until Element Is Visible           xpath://td[text()='${cpf_formatado}']           ${TIMEOUT} 
+    Click Element                           xpath://td[text()='${cpf_formatado}']
+    Wait Until Element Is Visible           ${DELETE_CUSTOMER_BUTTON}                       ${TIMEOUT} 
+    Click Element                           ${DELETE_CUSTOMER_BUTTON}
     
 Mas esse cpf ja exite no sistema
     Insert Customer     ${name}    ${cpf}     ${address}    ${phone}
